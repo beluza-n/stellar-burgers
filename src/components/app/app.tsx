@@ -1,19 +1,22 @@
+import {
+  AppHeader,
+  IngredientDetails,
+  Modal,
+  OrderInfo,
+  ProtectedRoute,
+} from '@components';
+import {
+  ConstructorPage,
+  Feed,
+  ForgotPassword,
+  Login,
+  NotFound404,
+  Profile,
+  ProfileOrders,
+  Register,
+  ResetPassword,
+} from '@pages';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-
-import { ConstructorPage } from '../../pages/constructor-page';
-import { Feed } from '../../pages/feed';
-import { ForgotPassword } from '../../pages/forgot-password';
-import { Login } from '../../pages/login';
-import { NotFound404 } from '../../pages/not-fount-404';
-import { Profile } from '../../pages/profile';
-import { ProfileOrders } from '../../pages/profile-orders';
-import { Register } from '../../pages/register';
-import { ResetPassword } from '../../pages/reset-password';
-import { AppHeader } from '../app-header';
-import { IngredientDetails } from '../ingredient-details';
-import { Modal } from '../modal';
-import { OrderInfo } from '../order-info';
-import { ProtectedRoute } from '../protected-route';
 
 import '../../index.css';
 
