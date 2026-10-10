@@ -1,6 +1,8 @@
 import { getFeedsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { USE_MOCKS, mockFeeds } from '../../mocks/data';
+
 import type { TFeedState } from '@utils-types';
 
 const initialState: TFeedState = {
@@ -11,7 +13,9 @@ const initialState: TFeedState = {
   error: null,
 };
 
-export const getFeeds = createAsyncThunk('feed/getAll', async () => getFeedsApi());
+export const getFeeds = createAsyncThunk('feed/getAll', async () =>
+  USE_MOCKS ? mockFeeds : getFeedsApi()
+);
 
 export const feedSlice = createSlice({
   name: 'feed',

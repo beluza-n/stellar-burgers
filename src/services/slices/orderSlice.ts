@@ -1,6 +1,8 @@
 import { getOrderByNumberApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { USE_MOCKS, getMockOrderByNumber } from '../../mocks/data';
+
 import type { TOrder } from '@utils-types';
 
 type TOrderState = {
@@ -18,6 +20,9 @@ const initialState: TOrderState = {
 export const getOrderByNumber = createAsyncThunk(
   'order/getByNumber',
   async (number: number) => {
+    if (USE_MOCKS) {
+      return getMockOrderByNumber(number);
+    }
     const data = await getOrderByNumberApi(number);
     return data.orders[0];
   }

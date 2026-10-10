@@ -1,6 +1,8 @@
 import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { USE_MOCKS, mockIngredients } from '../../mocks/data';
+
 import type { TIngredient } from '@utils-types';
 
 type TIngredientsState = {
@@ -15,9 +17,8 @@ const initialState: TIngredientsState = {
   error: null,
 };
 
-export const getIngredients = createAsyncThunk(
-  'ingredients/getAll',
-  async () => getIngredientsApi()
+export const getIngredients = createAsyncThunk('ingredients/getAll', async () =>
+  USE_MOCKS ? mockIngredients : getIngredientsApi()
 );
 
 export const ingredientsSlice = createSlice({
