@@ -16,7 +16,12 @@ import {
   Register,
   ResetPassword,
 } from '@pages';
+import { useEffect } from 'react';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+
+import { useDispatch } from '@services/store';
+
+import { getIngredients } from '../../services/slices/ingredientsSlice';
 
 import '../../index.css';
 
@@ -25,7 +30,12 @@ import styles from './app.module.css';
 const App = (): React.JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const backgroundLocation = location.state?.background;
+
+  useEffect(() => {
+    void dispatch(getIngredients());
+  }, [dispatch]);
 
   const onCloseModal = (): void => {
     void navigate(-1);
