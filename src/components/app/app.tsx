@@ -22,6 +22,7 @@ import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from '@services/store';
 
 import { getIngredients } from '../../services/slices/ingredientsSlice';
+import { checkUserAuth } from '../../services/slices/userSlice';
 
 import '../../index.css';
 
@@ -34,6 +35,7 @@ const App = (): React.JSX.Element => {
   const backgroundLocation = location.state?.background;
 
   useEffect(() => {
+    void dispatch(checkUserAuth());
     void dispatch(getIngredients());
   }, [dispatch]);
 
