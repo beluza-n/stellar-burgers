@@ -1,12 +1,14 @@
 import { ProfileUI } from '@ui-pages';
 import { type SyntheticEvent, useEffect, useState } from 'react';
 
+import { useDispatch, useSelector } from '@services/store';
+
+import { getUserSelector, updateUser } from '../../services/slices/userSlice';
+
 export const Profile = (): React.JSX.Element => {
+  const dispatch = useDispatch();
   /** TODO: Взять переменную из стора */
-  const user = {
-    name: '',
-    email: '',
-  };
+  const user = useSelector(getUserSelector)!;
 
   const [formValue, setFormValue] = useState({
     name: user.name,
@@ -19,6 +21,7 @@ export const Profile = (): React.JSX.Element => {
       ...prevState,
       name: user?.name || '',
       email: user?.email || '',
+      password: '',
     }));
   }, [user]);
 
@@ -29,6 +32,7 @@ export const Profile = (): React.JSX.Element => {
 
   const handleSubmit = (e: SyntheticEvent): void => {
     e.preventDefault();
+    void dispatch(updateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent): void => {

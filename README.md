@@ -36,3 +36,16 @@
 		'@utils': path.resolve(__dirname, './src/utils'),
 	},
 ```
+
+## API
+
+Учебный API `https://norma.education-services.ru/api` сейчас недоступен, поэтому проект работает со своим бэкендом (нужен vpn):
+
+```
+BURGER_API_URL=https://beluza.pythonanywhere.com/api
+```
+
+Пропишите этот адрес в `.env` (можно скопировать из `.env.example`).
+
+Также возможно работа с новым учебным апи:
+BURGER_API_URL=https://norma.ffapi.ru/api
