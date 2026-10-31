@@ -30,6 +30,7 @@ export const BurgerIngredientUI = memo(function BurgerIngredientUI({
         <p className={`text text_type_main-default ${styles.text}`}>{name}</p>
       </Link>
       <AddButton
+        data-testid={`add-ingredient-${_id}`}
         text="Добавить"
         onClick={handleAdd}
         extraClass={`${styles.addButton} mt-8`}
