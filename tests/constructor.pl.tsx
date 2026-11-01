@@ -52,3 +52,57 @@ test.describe('Модальное окно ингредиента', () => {
     await expect(page.getByTestId('modal')).not.toBeVisible();
   });
 });
+
+test.describe('Создание заказа', () => {
+  const bunId = '6acd6b8163765e371c0bd9eb';
+  const ingredientId = '6acd6b8163765e9acf0bd9ef';
+  const orderNumber = 753;
+
+  test.beforeEach(async ({ context, page }) => {
+    await context.addCookies([
+      {
+        name: 'accessToken',
+        value: 'Bearer%20fake-access-token',
+        domain: 'localhost',
+        path: '/',
+      },
+    ]);
+
+    await page.addInitScript(() => {
+      localStorage.setItem('refreshToken', 'fake-refresh-token');
+    });
+
+    await page.routeFromHAR('./tests/hars/ingredients.har', {
+      url: '**/api/ingredients',
+      update: false,
+    });
+
+    await page.routeFromHAR('./tests/hars/user.har', {
+      url: '**/api/auth/user',
+      update: false,
+    });
+
+    await page.routeFromHAR('./tests/hars/order.har', {
+      url: '**/api/orders',
+      update: false,
+    });
+
+    await page.goto('/');
+  });
+
+  test('создаёт заказ и очищает конструктор', async ({ page }) => {
+    await page.getByTestId(`add-ingredient-${bunId}`).click();
+    await page.getByTestId(`add-ingredient-${ingredientId}`).click();
+    await page.getByRole('button', { name: 'Оформить заказ' }).click();
+
+    await expect(page.getByTestId('modal')).toBeVisible();
+    await expect(page.getByTestId('modal')).toContainText(String(orderNumber));
+
+    await page.getByRole('button', { name: 'Закрыть' }).click();
+    await expect(page.getByTestId('modal')).not.toBeVisible();
+
+    await expect(page.getByTestId('constructor-empty-bun-top')).toBeVisible();
+    await expect(page.getByTestId('constructor-empty-ingredients')).toBeVisible();
+    await expect(page.getByTestId('constructor-empty-bun-bottom')).toBeVisible();
+  });
+});
