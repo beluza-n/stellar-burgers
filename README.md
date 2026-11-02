@@ -39,13 +39,10 @@
 
 ## API
 
-Учебный API `https://norma.education-services.ru/api` сейчас недоступен, поэтому проект работает со своим бэкендом (нужен vpn):
+Проект использует учебный API:
 
 ```
-BURGER_API_URL=https://beluza.pythonanywhere.com/api
+BURGER_API_URL=https://norma.ffapi.ru/api
 ```
 
 Пропишите этот адрес в `.env` (можно скопировать из `.env.example`).
-
-Также возможно работа с новым учебным апи:
-BURGER_API_URL=https://norma.ffapi.ru/api
