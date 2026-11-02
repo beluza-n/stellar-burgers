@@ -62,13 +62,13 @@ describe('Тесты редьюсера конструктора', () => {
   });
 
   test('Добавляем начинку', () => {
-    const action = addIngredient(ingredient);
-    const state = constructorSlice.reducer(initialState, action);
+    const firstState = constructorSlice.reducer(initialState, addIngredient(ingredient));
+    const state = constructorSlice.reducer(firstState, addIngredient(ingredient));
 
-    expect(state).toEqual({
-      bun: null,
-      ingredients: [action.payload],
-    });
+    expect(state.ingredients).toHaveLength(2);
+    expect(state.ingredients[0]).toEqual({ ...ingredient, id: expect.any(String) });
+    expect(state.ingredients[1]).toEqual({ ...ingredient, id: expect.any(String) });
+    expect(state.ingredients[0].id).not.toBe(state.ingredients[1].id);
   });
 
   test('Удаляем начинку', () => {
