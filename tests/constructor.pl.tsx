@@ -23,7 +23,7 @@ test.describe('Добавление ингредиентов в конструк
 });
 
 test.describe('Модальное окно ингредиента', () => {
-  const ingredientName = 'Краторная булка N-200i';
+  const ingredientName = 'Соус фирменный Space Sauce';
 
   test.beforeEach(async ({ page }) => {
     await page.routeFromHAR('./tests/hars/ingredients.har', {
