@@ -98,11 +98,11 @@ test.describe('Создание заказа', () => {
     await expect(page.getByTestId('modal')).toBeVisible();
     await expect(page.getByTestId('modal')).toContainText(String(orderNumber));
 
-    await page.getByRole('button', { name: 'Закрыть' }).click();
-    await expect(page.getByTestId('modal')).not.toBeVisible();
-
     await expect(page.getByTestId('constructor-empty-bun-top')).toBeVisible();
     await expect(page.getByTestId('constructor-empty-ingredients')).toBeVisible();
     await expect(page.getByTestId('constructor-empty-bun-bottom')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Закрыть' }).click();
+    await expect(page.getByTestId('modal')).not.toBeVisible();
   });
 });
